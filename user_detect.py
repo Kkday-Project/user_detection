@@ -26,7 +26,7 @@ def main():
 
     X_train, X_test, Y_train, Y_test = train_test_split(train_x, train_y, test_size=0.33, random_state=777)
 
-    model = RandomForestClassifier(max_depth=3, random_state=777, n_jobs=-1)
+    model = RandomForestClassifier(max_depth=None, random_state=777, n_jobs=-1)
     model.fit(X_train, Y_train)
     print(model.score(X_test, Y_test))
 
@@ -34,7 +34,7 @@ def main():
     pickle.dump(model, open(save_model_path, 'wb'))
     # 讀取預先儲存的模型
     load_model = pickle.load(open(save_model_path, 'rb'))
-    print(load_model.score(X_test, Y_test))
+    print(load_model.score(X_train, Y_train))
 
 if __name__ == "__main__":
     main()
